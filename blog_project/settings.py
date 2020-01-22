@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'blog',
     'accounts',
 ]
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # new!
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -70,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blog_project.wsgi.application'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # new!
 
 
 # Database
@@ -122,3 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' \
+# new!
